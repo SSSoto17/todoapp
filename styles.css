@@ -1,0 +1,6 @@
+@layer reset, variables, layout, global;
+
+@import "css/reset.css" layer(reset);
+@import "css/variables.css" layer(variables);
+@import "css/layout.css" layer(layout);
+@import "css/global.css" layer(global);

@@ -1,0 +1,89 @@
+body {
+  color: var(--dorado-700);
+}
+
+section {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 16px;
+  min-height: 500px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: clip;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--sea-pink-800);
+}
+
+aside {
+  display: grid;
+  color: var(--sea-pink-50);
+  background: var(--sea-pink-800);
+  padding-block: 3rem;
+  padding-inline-start: 3rem;
+
+  menu li {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: 0.1s ease-in;
+
+    &.active,
+    &:hover {
+      font-weight: 500;
+      background: white;
+      color: var(--sea-pink-800);
+      border-radius: 0.25rem 0 0 0.25rem;
+      cursor: pointer;
+    }
+  }
+
+  button {
+    place-self: end start;
+    transition: scale 0.15s ease-in;
+
+    &:hover {
+      scale: 1.05;
+    }
+  }
+}
+
+article {
+  padding: 3rem;
+}
+
+ul.tasks {
+  --flow-space: 0.5rem;
+  display: grid;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    menu {
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+
+      li {
+        cursor: pointer;
+
+        &:hover svg {
+          fill: var(--dorado-300);
+        }
+        svg {
+          width: 1rem;
+          cursor: pointer;
+          fill: var(--dorado-100);
+          pointer-events: none;
+        }
+      }
+    }
+  }
+
+  li:has(#addTask) {
+    order: 1;
+  }
+}

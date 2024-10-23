@@ -1,0 +1,40 @@
+:root {
+  /* SEA PINK */
+  --sea-pink-50: #fdf3f3;
+  --sea-pink-100: #fbe5e6;
+  --sea-pink-200: #f8d0d1;
+  --sea-pink-300: #ee9d9f;
+  --sea-pink-400: #e78284;
+  --sea-pink-500: #da595c;
+  --sea-pink-600: #c63c3f;
+  --sea-pink-700: #a62f32;
+  --sea-pink-800: #892b2d;
+  --sea-pink-900: #73292b;
+  --sea-pink-950: #3e1112;
+
+  /* AQUAMARINE */
+  --aquamarine-50: #ebfef5;
+  --aquamarine-100: #d0fbe5;
+  --aquamarine-200: #a5f5d0;
+  --aquamarine-300: #7aedbf;
+  --aquamarine-400: #2fd899;
+  --aquamarine-500: #0bbe82;
+  --aquamarine-600: #009b6a;
+  --aquamarine-700: #007c59;
+  --aquamarine-800: #036247;
+  --aquamarine-900: #04503c;
+  --aquamarine-950: #012d23;
+
+  /* DORADO */
+  --dorado-50: #f4f3f2;
+  --dorado-100: #e3e0de;
+  --dorado-200: #c9c1bf;
+  --dorado-300: #ab9c99;
+  --dorado-400: #92807d;
+  --dorado-500: #846f6e;
+  --dorado-600: #725f5f;
+  --dorado-700: #5b4d4e;
+  --dorado-800: #4f4445;
+  --dorado-900: #463d3f;
+  --dorado-950: #272122;
+}

@@ -1,0 +1,36 @@
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+header,
+main,
+footer {
+  display: grid;
+  grid-template-columns: minmax(2.5svw, 1fr) minmax(0%, 1200px) minmax(
+      2.5svw,
+      1fr
+    );
+
+  > * {
+    grid-column: 2;
+  }
+
+  section {
+    place-self: center;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    grid-template-rows: min-content 1fr;
+    gap: 2rem;
+
+    aside {
+      grid-row: 1 / -1;
+    }
+  }
+}
+
+.flow-space {
+  > * + * {
+    margin-block-start: var(--flow-space, 1em);
+  }
+}
