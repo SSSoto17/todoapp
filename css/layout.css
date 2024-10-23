@@ -19,9 +19,9 @@ footer {
   section {
     place-self: center;
     display: grid;
-    grid-template-columns: 1fr 2.5fr;
+    grid-template-columns: minmax(200px, 260px) minmax(260px, 1fr);
     grid-template-rows: min-content 1fr;
-    gap: 2rem;
+    gap: min(2svw, 2rem);
 
     aside {
       grid-row: 1 / -1;

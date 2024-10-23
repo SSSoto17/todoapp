@@ -1,28 +1,66 @@
+/* COLOUR */
+
+:root {
+  --clr-text-heading: var(--sea-pink-800);
+  --clr-text-body: var(--dorado-700);
+  --clr-surface: transparent;
+  --clr-dropshadow: 2px 4px 8px var(--dorado-100);
+}
+
+[data-theme="sidebar"] {
+  --clr-text-heading: var(--sea-pink-50);
+  --clr-text-body: var(--sea-pink-50);
+  --clr-surface: var(--sea-pink-800);
+}
+
 body {
-  color: var(--dorado-700);
+  color: var(--clr-text-body);
+  background: var(--clr-surface);
+
+  * {
+    color: var(--clr-text-body);
+    background: var(--clr-surface);
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--clr-text-heading);
+  }
 }
 
 section {
-  width: 100%;
-  max-width: 800px;
-  border-radius: 16px;
+  width: min(100%, 800px);
+  border-radius: 1rem;
   min-height: 500px;
-  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--clr-dropshadow);
   overflow: clip;
 }
 
 h1 {
   font-size: 2rem;
   font-weight: 600;
-  color: var(--sea-pink-800);
+  width: 80%;
+
+  input {
+    color: inherit;
+    transition: opacity 0.15s ease-in;
+    --clr-input-border: var(--dorado-50);
+  }
+
+  &:hover input {
+    opacity: 0.6;
+    border-bottom: 1px solid var(--dorado-50);
+  }
 }
 
 aside {
+  --padding: min(10svw, 3rem);
   display: grid;
-  color: var(--sea-pink-50);
-  background: var(--sea-pink-800);
-  padding-block: 3rem;
-  padding-inline-start: 3rem;
+  padding-block: var(--padding);
+  padding-inline-start: var(--padding);
+  --clr-input-border: var(--sea-pink-200);
+  --clr-input-placeholder: var(--sea-pink-500);
 
   menu li {
     padding: 0.5rem 1rem;
@@ -30,7 +68,7 @@ aside {
     transition: 0.1s ease-in;
 
     &.active,
-    &:hover {
+    &:not(:has(input)):hover {
       font-weight: 500;
       background: white;
       color: var(--sea-pink-800);
@@ -50,17 +88,66 @@ aside {
 }
 
 article {
-  padding: 3rem;
+  padding: min(5svw, 3rem);
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-rows: min-content min-content 1fr;
 }
 
 ul.tasks {
   --flow-space: 0.5rem;
   display: grid;
+  --clr-input-border: var(--dorado-50);
+  --clr-input-placeholder: var(--dorado-300);
 
   li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    fieldset,
+    fieldset input,
+    fieldset label {
+      cursor: pointer;
+    }
+
+    fieldset label {
+      display: flex;
+      align-items: center;
+      gap: min(1svw, 1rem);
+
+      &::before {
+        --size: 1rem;
+        display: block;
+        content: "";
+        width: var(--size);
+        height: var(--size);
+        border: 1px solid var(--dorado-200);
+        border-radius: 0.15rem;
+      }
+
+      &:hover::before {
+        border: 1px solid var(--sea-pink-200);
+        box-shadow: 1px 1px 4px var(--dorado-50);
+        /* background-color: red; */
+      }
+    }
+
+    fieldset input[type="checkbox"]:checked + label::before {
+      background: var(--sea-pink-500) url("../checkmark.svg");
+      background-size: 75%;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      border: none;
+    }
+
+    &:has(input[type="checkbox"]:checked) {
+      order: 2;
+      label {
+        color: var(--dorado-200);
+        text-decoration: line-through;
+      }
+    }
 
     menu {
       display: flex;
@@ -85,5 +172,43 @@ ul.tasks {
 
   li:has(#addTask) {
     order: 1;
+    margin-block-start: 0.75rem;
+
+    ul.tasks:has(input[type="checkbox"]:checked) & {
+      margin-block: 0.75rem 1.5rem;
+    }
+
+    input {
+      width: 80%;
+      cursor: pointer;
+    }
   }
+}
+
+#deleteList {
+  place-self: end;
+
+  svg {
+    width: 1.5rem;
+    path {
+      fill: var(--sea-pink-700);
+    }
+  }
+}
+
+input[type="text"] {
+  width: 100%;
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-bottom: 1px solid var(--clr-input-border);
+    padding-block: 0.25rem;
+  }
+  &::placeholder {
+    color: var(--clr-input-placeholder);
+  }
+}
+
+input[type="checkbox"] {
+  display: none;
 }
