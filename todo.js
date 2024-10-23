@@ -6,24 +6,39 @@ const newListBtn = document.querySelector("aside button");
 const taskList = document.querySelector("ul.tasks");
 const addTask = document.querySelector("#addTask");
 
-const taskLists = [
-  {
-    title: "Home",
-    active: true,
-    tasks: ["Do the dishes", "Walk the dog", "Buy groceries"],
-  },
-  {
-    title: "Work",
-    active: false,
-    tasks: ["Send email", "Write report"],
-  },
-  {
-    title: "School",
-    active: false,
-    tasks: ["Do the dishes", "Walk the dog", "Buy groceries"],
-  },
-];
-const tasks = [];
+const storedTaskLists = localStorage.getItem("taskLists");
+
+// MODEL
+let taskLists;
+if (storedTaskLists === null) {
+  taskLists = [
+    {
+      title: "Home",
+      active: true,
+      tasks: ["Do the dishes", "Walk the dog", "Buy groceries"],
+    },
+    {
+      title: "Work",
+      active: false,
+      tasks: ["Send email", "Write report"],
+    },
+    {
+      title: "School",
+      active: false,
+      tasks: ["Do the dishes", "Walk the dog", "Buy groceries"],
+    },
+  ];
+} else {
+  taskLists = JSON.parse(storedTaskLists);
+}
+
+// CONTROLLER
+
+function updateLocalStorage() {
+  localStorage.setItem("taskLists", JSON.stringify(taskLists));
+}
+
+// VIEW
 
 // TASK LISTS
 
@@ -85,6 +100,7 @@ newListBtn.addEventListener("click", (e) => {
       resetActiveList();
       taskLists.push({ title: e.target.value, active: true, tasks: [] });
       console.log(taskLists);
+      updateLocalStorage();
       displayTaskLists();
     }
   });
