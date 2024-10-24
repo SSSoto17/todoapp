@@ -55,7 +55,7 @@ h1 {
 }
 
 aside {
-  --padding: min(10svw, 3rem);
+  --padding: min(6svw, 3rem);
   display: grid;
   padding-block: var(--padding);
   padding-inline-start: var(--padding);
@@ -77,12 +77,28 @@ aside {
     }
   }
 
-  button {
+  button#mobileNav {
+    display: none;
+    margin-inline-end: var(--padding);
+    cursor: pointer;
+    svg {
+      width: 1.5rem;
+      path {
+        fill: var(--clr-text-body);
+      }
+    }
+  }
+
+  button#addList {
     place-self: end start;
     transition: scale 0.15s ease-in;
 
     &:hover {
       scale: 1.05;
+    }
+
+    span.addListMobile {
+      display: none;
     }
   }
 }
@@ -211,4 +227,69 @@ input[type="text"] {
 
 input[type="checkbox"] {
   display: none;
+}
+
+/* MOBILE COLLAPSIBLE NAV */
+
+@media (max-width: 480px) {
+  /* SIDEBAR CLOSED */
+
+  aside menu {
+    display: none;
+  }
+
+  aside:has(menu:not(.active)) {
+    button {
+      display: block;
+
+      &#mobileNav {
+        place-self: start center;
+      }
+
+      &#addList {
+        place-self: end center;
+        margin-inline-end: min(6svw, 3rem);
+
+        span.addListDesktop {
+          display: none;
+        }
+        span.addListMobile {
+          display: block;
+          font-size: 2rem;
+        }
+      }
+    }
+
+    button#addList {
+      display: block;
+    }
+  }
+
+  aside button#mobileNav {
+    display: block;
+    place-self: start;
+
+    aside:has(menu.active) & {
+      display: none;
+    }
+  }
+
+  /* SIDEBAR ACTIVE */
+  aside menu.active {
+    display: block;
+  }
+
+  section:has(menu.active) {
+    grid-template-columns: 85% 1fr;
+
+    aside {
+      grid-column: 1;
+      width: 85%;
+      z-index: 1;
+
+      & + article {
+        grid-column: 1 / -1;
+      }
+    }
+  }
 }

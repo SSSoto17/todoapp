@@ -1,10 +1,13 @@
 "use strict";
 
+const mobileNav = document.querySelector("#mobileNav");
+
 const listSidebar = document.querySelector("aside menu");
 const listTitle = document.querySelector("h1 input");
-const newListBtn = document.querySelector("aside button");
+const newListBtn = document.querySelector("#addList");
 const deleteListBtn = document.querySelector("#deleteList");
 
+const taskWindow = document.querySelector("article");
 const viewTasks = document.querySelector("ul.tasks");
 const addTaskInput = document.querySelector("#addTask");
 
@@ -109,6 +112,16 @@ function removeList(id) {
   displayTaskLists();
 }
 
+mobileNav.addEventListener("click", () => {
+  listSidebar.classList.add("active");
+});
+
+taskWindow.addEventListener("click", (e) => {
+  if (listSidebar.classList.contains("active")) {
+    listSidebar.classList.remove("active");
+  }
+});
+
 // SELECTING A LIST
 listSidebar.addEventListener("click", (e) => {
   resetActiveList();
@@ -116,34 +129,34 @@ listSidebar.addEventListener("click", (e) => {
     (list) => list.title == e.target.textContent
   );
   taskLists[currentList].active = true;
+  listSidebar.classList.remove("active");
   updateLocalStorage();
   displayTaskLists();
 });
 
 // CREATING A NEW LIST
 newListBtn.addEventListener("click", (e) => {
+  listSidebar.classList.add("active");
   const newList = `<li><input id="addTaskList" type="text" placeholder="New task list..."/></li>`;
   listSidebar.innerHTML += newList;
 
   const listNameInput = listSidebar.querySelector("input");
   listNameInput.focus();
+
   listNameInput.addEventListener("keydown", (e) => {
     if (e.code === "Enter") {
+      if (e.target.value === "") {
+        listNameInput.closest("li").remove();
+      }
       resetActiveList();
       taskLists.push({ title: e.target.value, active: true, tasks: [] });
+      listSidebar.classList.remove("active");
       updateLocalStorage();
       displayTaskLists();
     }
   });
   listNameInput.addEventListener("focusout", (e) => {
-    if (e.target.value === "") {
-      listNameInput.closest("li").remove();
-    } else {
-      resetActiveList();
-      taskLists.push({ title: e.target.value, active: true, tasks: [] });
-      updateLocalStorage();
-      displayTaskLists();
-    }
+    listNameInput.closest("li").remove();
   });
 });
 
@@ -239,7 +252,6 @@ viewTasks.addEventListener("click", (e) => {
           (task) => task.title == oldLabel
         );
         const newTask = e.target.value;
-        console.log(activeTasks[currentTask]);
         activeTasks[currentTask].title = newTask;
         activeTasks[currentTask].done = false;
         updateLocalStorage();
