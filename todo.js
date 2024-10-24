@@ -135,6 +135,16 @@ newListBtn.addEventListener("click", (e) => {
       displayTaskLists();
     }
   });
+  listNameInput.addEventListener("focusout", (e) => {
+    if (e.target.value === "") {
+      listNameInput.closest("li").remove();
+    } else {
+      resetActiveList();
+      taskLists.push({ title: e.target.value, active: true, tasks: [] });
+      updateLocalStorage();
+      displayTaskLists();
+    }
+  });
 });
 
 // DELETING A LIST
@@ -145,7 +155,7 @@ deleteListBtn.addEventListener("click", (e) => {
 });
 
 // EDIT LIST TITLE
-listTitle.addEventListener("keydown", function (e) {
+listTitle.addEventListener("keydown", (e) => {
   if (e.code === "Enter") {
     const activeList = taskLists.findIndex((list) => list.active === true);
     const newListTitle = e.target.value;
@@ -154,6 +164,15 @@ listTitle.addEventListener("keydown", function (e) {
     displayTaskLists();
     listTitle.blur();
   }
+});
+
+listTitle.addEventListener("focusout", (e) => {
+  const activeList = taskLists.findIndex((list) => list.active === true);
+  const newListTitle = e.target.value;
+  taskLists[activeList].title = newListTitle;
+  updateLocalStorage();
+  displayTaskLists();
+  listTitle.blur();
 });
 
 // ADD NEW TASK
@@ -172,10 +191,15 @@ addTaskInput.addEventListener("keydown", function (e) {
   }
 });
 
+addTaskInput.addEventListener("focusout", () => {
+  addTaskInput.value = "";
+});
+
 // TASK ACTIONS
 viewTasks.addEventListener("click", (e) => {
   const activeList = taskLists.findIndex((list) => list.active === true);
-  const targetTask = e.target.closest(".task");
+  const targetTask = e.target.closest("li.task");
+  const targetTaskOriginal = targetTask.innerHTML;
 
   // MARK TASK AS DONE
   if (e.target.matches("label")) {
@@ -200,10 +224,13 @@ viewTasks.addEventListener("click", (e) => {
   // EDIT TASK
   if (e.target.classList.contains("actionEdit")) {
     const oldLabel = targetTask.querySelector("label").textContent;
-    targetTask.innerHTML = `<input id="editTask" type="text" placeholder="Edit task..." />`;
+    targetTask.innerHTML = `<label for=""></label><input id="editTask" type="text" placeholder="Edit task..." />`;
     const editingTask = targetTask.querySelector("input");
     editingTask.value = oldLabel;
     editingTask.focus();
+    editingTask.addEventListener("focusout", (e) => {
+      targetTask.innerHTML = targetTaskOriginal;
+    });
     editingTask.addEventListener("keydown", (e) => {
       if (e.code === "Enter") {
         const activeList = taskLists.findIndex((list) => list.active === true);
