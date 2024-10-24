@@ -173,10 +173,10 @@ viewTasks.addEventListener("click", (e) => {
 
 ## Refleksion
 
-Havde jeg haft yderligere tid, er jeg sikker på, at koden kunne nedskrives betydeligt ved at rykke linjer, jeg genbrugte mange steder, over i en funktion, der så kunne kaldes når det blev relevant. Jeg ville også mene, at benyttelse af JS-modules ville gøre en app som denne meget mere overskuelig og organiseret at kode, samt brug af et framework som Astro, som ville gøre brug af <template> overflødig.
+Havde jeg haft yderligere tid, er jeg sikker på, at koden kunne nedskrives betydeligt ved at rykke linjer, jeg genbrugte mange steder, over i en funktion, der så kunne kaldes når det blev relevant. Jeg ville også mene, at benyttelse af JS-modules ville gøre en app som denne meget mere overskuelig og organiseret at kode, samt brug af et framework som Astro, som ville gøre brug af template-elementet overflødigt.
 
-Min største udfordring har bestemt ligget i at få så mange forskellige funktioner til at snakke sammen, så der ikke var konflikt. Ofte når en funktionalitet var blevet lavet, var der andet, der gik i stykker. Dette ville have været nemmere at undgå, hvis koden havde været mere organiseret og renskrevet som udgangspunkt.
+Min største udfordring har ligget i at få så mange forskellige funktioner til at snakke sammen, så der ikke var konflikt. Ofte når en funktionalitet var blevet lavet, var der andet, der gik i stykker. Dette ville have været nemmere at undgå, hvis koden havde været mere organiseret og renskrevet som udgangspunkt.
 
-Jeg har i min løsning lavet en delete-knap, der kan slette hele lister, men denne fungerer ikke helt som forventet på den første liste i arrayet grundet den metode, jeg benytter til at finde ud af, hvilken liste, der skal være selected (class=”active”) efter en liste er slettet.
+Jeg har f.eks. i min løsning lavet en delete-knap, der kan slette hele lister, men denne fungerer ikke helt som forventet på den første liste i arrayet grundet den metode, jeg benytter til at finde ud af, hvilken liste, der skal være selected (class=”active”) efter en liste er slettet.
 
 Når en liste bliver slettet, vælger scriptet et objekt i arrayet som har den aktive listes indeks minus 1, så det altid vil være listen før den slettede liste, som bliver aktiv. Dette virker dog ikke på den første liste, som ikke har et objekt før sig i arrayet. For at løse dette, kunne man evt. indskrive en or-betingelse, som sammenligner om indeksnummeret er højere end 0, således at hvis indekset bliver minus, vil den aktive liste bestemmes ud fra indeksnummeret plus 1 eller array.length.
