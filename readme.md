@@ -1,8 +1,8 @@
-#Soto's To Do App
+# Soto's To Do App
 
 Min to do app er sammensat af et array af forskellige lister, som hver har deres egne opgaver (”tasks”) tilknyttet. Disse bliver manipuleret igennem controllers i min app, hvori man både kan slette lister og oprette nye lister, og slette, tilføje eller redigere opgaverne i hver liste.
 
-##HTML-struktur
+## HTML-struktur
 
 I HTML-strukturen har jeg lavet en sidebar (”aside”) til at holde de forskellige lister, som kan klikkes på. Når en liste er selected (class=”active”) vil arrayet af tasks i den blive rendered i vinduet. Disse bliver sat ind i en ul med class=”tasks”.
 
@@ -39,7 +39,7 @@ Da mit li-element i HTML er så komplekst, har jeg valgt at gemme hele strukture
 </template>
 ```
 
-##JS og MVC
+## JS og MVC
 
 Min js er opbygget med MVC-strukturen, der deles op i en model—min datastruktur, altså min liste af tasks—et view, dvs. hvad der udskrives på skærmen, og en controller, som er funktioner, der vil ændre i min model, og sende ændringerne tilbage for at blive vist på skærmen. Da jeg havde med en kompleks datastruktur at gøre, er min js også endt med at blive lang, med mange funktioner, der skal kunne gøre funktionaliteten mere brugervenlig.
 
@@ -110,7 +110,7 @@ if (storedTaskLists === null) {
 }
 ```
 
-##Task Events
+## Task Events
 
 Den hovedsagelige del af scriptet, der foretager de markante ændringer, er min event listener på ul.tasks. Jeg har ved hjælp af event delegation givet hele ul-elementet en event listener, der vil udføre forskellige opgaver afhængig af targetet, der er landet på.
 
@@ -171,7 +171,7 @@ viewTasks.addEventListener("click", (e) => {
 });
 ```
 
-##Refleksion
+## Refleksion
 
 Havde jeg haft yderligere tid, er jeg sikker på, at koden kunne nedskrives betydeligt ved at rykke linjer, jeg genbrugte mange steder, over i en funktion, der så kunne kaldes når det blev relevant. Jeg ville også mene, at benyttelse af JS-modules ville gøre en app som denne meget mere overskuelig og organiseret at kode, samt brug af et framework som Astro, som ville gøre brug af <template> overflødig.
 
