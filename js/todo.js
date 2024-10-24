@@ -112,6 +112,7 @@ function removeList(id) {
   displayTaskLists();
 }
 
+// MOBILE SIDEBAR
 mobileNav.addEventListener("click", () => {
   listSidebar.classList.add("active");
 });
